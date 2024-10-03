@@ -20,9 +20,11 @@ class App {
 	 */
 	constructor(el, location) {
 		const hash = location.hash ? queryString.parse(location.hash) : {};
+		const params = queryString.parse(location.search);
+		const modelName = params.model_name || '';
 		this.options = {
 			kiosk: Boolean(hash.kiosk),
-			model: hash.model || '',
+			model: modelName ? `./models/${modelName}` : '',
 			preset: hash.preset || '',
 			cameraPosition: hash.cameraPosition ? hash.cameraPosition.split(',').map(Number) : null,
 		};
